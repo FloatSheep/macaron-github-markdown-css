@@ -14,6 +14,12 @@ Clone the project using this command:
 git clone https://github.com/FloatSheep/macaron-github-markdown-css.git
 ```
 
+Install the dependencies:
+
+```bash
+npm install
+```
+
 Execute the build command:
 
 ```bash
