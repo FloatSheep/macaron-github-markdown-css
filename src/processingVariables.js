@@ -10,9 +10,9 @@ fs.readFile("pending/variables.css", (e, d) => {
     csstree.walk(ast, {
       visit: "Atrule",
       enter(node) {
-        if (node.name === "media") {
-          const mediaQuery = csstree.generate(node.prelude);
-          if (mediaQuery.includes("prefers-color-scheme")) {
+        if (node.name === "media" && node.prelude.children.length === 1) {
+          const mediaQuery = csstree.generate(node.prelude.children[0]);
+          if (mediaQuery.includes("prefers-color-scheme: dark")) {
             csstree.walk(node, {
               visit: "Rule",
               enter(ruleNode) {
@@ -52,15 +52,18 @@ fs.readFile("pending/variables.css", (e, d) => {
       enter(ruleNode) {
         if (ruleNode.prelude.type === "SelectorList") {
           ruleNode.prelude.children.forEach((selector) => {
-            const newSelector = csstree.parse(
-              `html.app-dark ${csstree.generate(selector)}`,
-              { context: "selector" }
-            );
-            newRules.push({
-              type: "Rule",
-              prelude: newSelector,
-              block: ruleNode.block,
-            });
+            const selectorStr = csstree.generate(selector);
+            if (!selectorStr.includes("prefers-color-scheme: light") && !selectorStr.includes('[data-theme="light"]')) {
+              const newSelector = csstree.parse(
+                `html.app-dark ${selectorStr}`,
+                { context: "selector" }
+              );
+              newRules.push({
+                type: "Rule",
+                prelude: newSelector,
+                block: ruleNode.block,
+              });
+            }
           });
         }
       },
