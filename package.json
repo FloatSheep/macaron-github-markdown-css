@@ -1,6 +1,6 @@
 {
   "name": "@floatsheep/macaron-github-markdown-css",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "The minimal amount of CSS to replicate the GitHub Markdown style for reblog-theme-macaron",
   "main": "dist/github-markdown-css.css",
   "type": "module",
@@ -21,6 +21,7 @@
     "css-tree": "^2.3.1",
     "eslint": "9.x",
     "generate-github-markdown-css": "^6.3.0",
+    "global-agent": "^3.0.0",
     "globals": "^15.8.0"
   }
 }

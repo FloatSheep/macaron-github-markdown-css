@@ -1,3 +1,12 @@
+import { bootstrap } from 'global-agent';
+import process from 'process';
+
+// 设置代理地址
+process.env.GLOBAL_AGENT_HTTP_PROXY = 'http://127.0.0.1:7890';
+
+// 初始化 global-agent
+bootstrap();
+
 import githubMarkdownCss from "generate-github-markdown-css";
 import fs from "fs";
 
